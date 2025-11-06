@@ -36,7 +36,7 @@ module Api
       def generate_upload_url
         # Return the URL to our upload endpoint
         # The frontend expects a string URL, not an object
-        upload_url = url_for(action: :upload_file, controller: 'api/v1/evaluations', only_path: false, host: request.host_with_port)
+        upload_url = url_for(action: :upload_file, controller: "api/v1/evaluations", only_path: false, host: request.host_with_port)
         render json: upload_url
       end
       
@@ -49,7 +49,7 @@ module Api
           content_type = request.content_type || "image/jpeg"
           
           # Create a tempfile to upload
-          temp_file = Tempfile.new(['upload', '.jpg'])
+          temp_file = Tempfile.new([ "upload", ".jpg" ])
           temp_file.binmode
           temp_file.write(file_data)
           temp_file.rewind
@@ -121,4 +121,3 @@ module Api
     end
   end
 end
-
