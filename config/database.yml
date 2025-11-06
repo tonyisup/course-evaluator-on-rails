@@ -23,24 +23,25 @@ default: &default
 development:
   <<: *default
   database: course_evaluator_development
+  url: postgresql://neondb_owner:npg_QWGHKU8fSF3k@ep-long-block-aatj32d8-pooler.westus3.azure.neon.tech/neondb?sslmode=require&channel_binding=require
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  username: postgres
+  # username: postgres
 
   # The password associated with the PostgreSQL role (username).
-  password: "!PT3ch!@#$"
+  # password: "!PT3ch!@#$"
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  host: localhost
+  # host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  port: 5433
+  # port: 5433
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -56,11 +57,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: course_evaluator_test
-  username: postgres
-  password: "!PT3ch!@#$"
-  host: localhost
-  port: 5433
+  database: course_evaluator_test  
+  url: postgresql://neondb_owner:npg_QWGHKU8fSF3k@ep-long-block-aatj32d8-pooler.westus3.azure.neon.tech/neondb?sslmode=require&channel_binding=require
+  #username: postgres
+  #password: "!PT3ch!@#$"
+  #host: localhost
+  #port: 5433
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -92,8 +94,7 @@ production:
   primary: &primary_production
     <<: *default
     database: course_evaluator_production
-    username: course_evaluator
-    password: <%= ENV["COURSE_EVALUATOR_DATABASE_PASSWORD"] %>
+    url: <%= ENV["DATABASE_URL"] %> 
   cache:
     <<: *primary_production
     database: course_evaluator_production_cache
