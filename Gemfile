@@ -44,6 +44,7 @@ gem "devise"
 gem "dotenv-rails"
 gem "rack-cors"
 gem "openai-ruby"
+gem "tailwindcss-rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
