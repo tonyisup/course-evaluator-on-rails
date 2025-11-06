@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api do
     namespace :v1 do
-      resources :evaluations, only: [:index, :create] do
+      resources :evaluations, only: [ :index, :create ] do
         collection do
           post :generate_upload_url
           post :upload_file

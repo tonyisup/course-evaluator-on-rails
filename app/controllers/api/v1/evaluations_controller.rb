@@ -39,7 +39,7 @@ module Api
         upload_url = url_for(action: :upload_file, controller: "api/v1/evaluations", only_path: false, host: request.host_with_port)
         render json: upload_url
       end
-      
+
       def upload_file
         # This endpoint handles the actual file upload
         # The frontend POSTs the file in the request body with Content-Type header
@@ -47,22 +47,22 @@ module Api
           # Read the file from request body
           file_data = request.body.read
           content_type = request.content_type || "image/jpeg"
-          
+
           # Create a tempfile to upload
           temp_file = Tempfile.new([ "upload", ".jpg" ])
           temp_file.binmode
           temp_file.write(file_data)
           temp_file.rewind
-          
+
           blob = ActiveStorage::Blob.create_and_upload!(
             io: temp_file,
             filename: "image.jpg",
             content_type: content_type
           )
-          
+
           temp_file.close
           temp_file.unlink
-          
+
           render json: { storageId: blob.signed_id }
         else
           render json: { error: "No file provided" }, status: :bad_request
@@ -72,7 +72,7 @@ module Api
       private
 
       def evaluation_params
-        params.permit(:input_type, :text_input, :external_courses_count, :internal_courses_count, :is_simple_mode, :image_ids => [])
+        params.permit(:input_type, :text_input, :external_courses_count, :internal_courses_count, :is_simple_mode, image_ids: [])
       end
 
       def format_evaluation(evaluation)
@@ -100,7 +100,7 @@ module Api
         # TODO: Implement actual AI processing logic here
         # This should call your AI service (OpenAI, Anthropic, etc.)
         # to analyze the course descriptions and generate the evaluation
-        
+
         # Placeholder response structure matching the frontend expectations
         {
           coverage: "High",
